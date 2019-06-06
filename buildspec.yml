@@ -16,9 +16,7 @@ phases:
       - rm -rf /tmp/hugo*
   build:
     commands:
-      - ls
-      - cd site
-      - hugo
+      - hugo --source site
   post_build:
     commands:
       - aws s3 sync --delete ./site/public s3://BUCKETNAME --cache-control max-age=3600
