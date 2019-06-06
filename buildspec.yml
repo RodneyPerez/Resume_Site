@@ -7,6 +7,8 @@ environment_variables:
 
 phases:
   install:
+    runtime-versions:
+        docker: 18
     commands:
       - curl -Ls https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_${HUGO_VERSION}_Linux-64bit.tar.gz -o /tmp/hugo.tar.gz
       - tar xf /tmp/hugo.tar.gz -C /tmp
