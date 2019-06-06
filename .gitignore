@@ -1,0 +1,3 @@
+codepipeline/terraform.tfvars
+infra/.terraform
+infra/terraform.tfvars
