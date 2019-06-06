@@ -1,0 +1,55 @@
+<head>
+  <title>{{ .Site.Params.title }}</title>
+
+  <meta name="theme-color" content="#fff" />
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <meta name="description" content="{{ .Site.Params.description }}" />
+  <meta name="author" content="{{ .Site.Params.author }}" />
+  {{- $hugoGenerator := index (findRE `content=\"(.+)\"` hugo.Generator) 0 }}
+  <meta name="generator" content="aafu theme by Darshan in {{ replaceRE `content=|\"` `` $hugoGenerator }}" />
+
+  {{- if .Site.Params.favicons.use }}
+  {{- $metas := .Site.Params.favicons.metas }}
+  {{- range (split $metas "\n") }}
+  {{- $ll := (index (findRE "^href=\"(.+)\"$" .) 0) | relURL }}
+  {{- replaceRE "^href=\"(.+)\"$" `$ll` . | safeHTML }}
+  {{- end }}
+  {{ end -}}
+
+  <link
+    rel="stylesheet"
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+    crossorigin="anonymous"
+  />
+  <link
+    rel="stylesheet"
+    href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
+    integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU"
+    crossorigin="anonymous"
+  />
+  <link
+    rel="stylesheet"
+    href="https://cdn.rawgit.com/jpswalsh/academicons/master/css/academicons.min.css"
+  />
+  <link
+    href="https://fonts.googleapis.com/css?family=Alegreya%7CLato"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="{{ `/css/aafu.css` | relURL }}" />
+
+  <script src="{{ `/js/themes.js` | relURL }}"></script>
+  <script src="{{ `/js/toggleTheme.js` | relURL }}"></script>
+  <script>
+    window.onload = function() {
+      Array.from(document.querySelectorAll(".markdownify")).map(function(elems) {
+        let elem = Array.from(elems.querySelectorAll("a"));
+        elem.forEach(function(x) {
+          x.classList.add("{{cond .Site.Params.useDarkTheme `text-warning` `text-primary` }}"
+          );
+        });
+      });
+    };
+  </script>
+</head>

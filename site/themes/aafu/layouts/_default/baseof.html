@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.LanguageCode }}">
+  {{- partial "head.html" . -}}
+  <body class="container bg-light" style="max-width: 1400px;">
+    <div id="content">
+      {{- block "main" . }}
+      {{- end }}
+    </div>
+  </body>
+</html>

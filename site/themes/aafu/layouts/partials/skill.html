@@ -1,0 +1,9 @@
+{{ range.Site.Params.skill.list }}
+<code>{{ .skill }}</code>
+<div class="w-100 bg-secondary mt-1 mb-3">
+  <div
+    class="bg-primary"
+    style="width: {{ .skillrating }}%; height:15px;"
+  ></div>
+</div>
+{{ end }}
