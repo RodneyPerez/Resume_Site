@@ -1,10 +1,10 @@
 resource "aws_s3_bucket" "codepipeline_bucket" {
-  bucket = "test-bucket"
+  bucket = "${var.domain_name}-pipeline"
   acl    = "private"
 }
 
 resource "aws_iam_role" "codepipeline_role" {
-  name = "test-role"
+  name = "${var.domain_name}-pipeline_role"
 
   assume_role_policy = <<EOF
 {
@@ -23,8 +23,8 @@ EOF
 }
 
 resource "aws_codepipeline" "codepipeline" {
-  name     = "tf-test-pipeline"
-  role_arn = "${aws_iam_role.codepipeline_role.arn}"
+  name     = "${var.domain_name}-pipeline"
+  role_arn = "${aws_iam_role.codebuild_role.arn}"
 
   artifact_store {
     location = "${aws_s3_bucket.codepipeline_bucket.bucket}"
@@ -43,15 +43,16 @@ resource "aws_codepipeline" "codepipeline" {
       output_artifacts = ["source_output"]
 
       configuration = {
-        Owner  = "my-organization"
-        Repo   = "test"
-        Branch = "master"
+        Owner  = "${var.owner}"
+        Repo   = "${var.repo_name}"
+        Branch = "${var.branch}"
+        OAuthToken = "${var.github_token}"
       }
     }
   }
 
   stage {
-    name = "Build and Deploy"
+    name = "Build-Deploy"
 
     action {
       name             = "Build"
@@ -63,7 +64,7 @@ resource "aws_codepipeline" "codepipeline" {
       version          = "1"
 
       configuration = {
-        ProjectName = "test"
+        ProjectName = "${aws_codebuild_project.main.name}"
       }
     }
   }

@@ -19,4 +19,4 @@ phases:
       - hugo --source site
   post_build:
     commands:
-      - aws s3 sync --delete site/public s3://$BUCKETNAME --cache-control max-age=3600
+      - aws s3 sync --delete site/public s3://$BUCKETNAME --cache-control max-age=604800
