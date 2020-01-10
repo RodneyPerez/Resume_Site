@@ -8,10 +8,10 @@ resource "aws_cloudfront_distribution" "cdn" {
     origin_path = ""
 
     custom_origin_config {
-      http_port               = 80
-      https_port              = 443
-      origin_protocol_policy  = "http-only"
-      origin_ssl_protocols    = ["TLSv1.2", "TLSv1.1", "TLSv1"]
+      http_port              = 80
+      https_port             = 443
+      origin_protocol_policy = "http-only"
+      origin_ssl_protocols   = ["TLSv1.2", "TLSv1.1", "TLSv1"]
     }
 
     custom_header {
@@ -24,7 +24,7 @@ resource "aws_cloudfront_distribution" "cdn" {
   enabled             = true
   is_ipv6_enabled     = true
   default_root_object = "index.html"
-  aliases             = ["${var.domain_name}"]
+  aliases             = ["${var.domain_name}", "${var.www_domain_name}"]
   depends_on          = ["aws_s3_bucket.main"]
 
 
@@ -51,9 +51,9 @@ resource "aws_cloudfront_distribution" "cdn" {
   }
 
   viewer_certificate {
-    acm_certificate_arn       = "${aws_acm_certificate_validation.default.certificate_arn}"
-    ssl_support_method        = "sni-only"
-    minimum_protocol_version  = "TLSv1.1_2016"
+    acm_certificate_arn      = "${aws_acm_certificate_validation.default.certificate_arn}"
+    ssl_support_method       = "sni-only"
+    minimum_protocol_version = "TLSv1.1_2016"
   }
 
   tags = "${var.main_tags}"
