@@ -20,14 +20,15 @@ resource "aws_iam_role" "codepipeline_role" {
   ]
 }
 EOF
+
 }
 
 resource "aws_codepipeline" "codepipeline" {
   name     = "${var.domain_name}-pipeline"
-  role_arn = "${aws_iam_role.codebuild_role.arn}"
+  role_arn = aws_iam_role.codebuild_role.arn
 
   artifact_store {
-    location = "${aws_s3_bucket.codepipeline_bucket.bucket}"
+    location = aws_s3_bucket.codepipeline_bucket.bucket
     type     = "S3"
   }
 
@@ -43,10 +44,10 @@ resource "aws_codepipeline" "codepipeline" {
       output_artifacts = ["source_output"]
 
       configuration = {
-        Owner  = "${var.owner}"
-        Repo   = "${var.repo_name}"
-        Branch = "${var.branch}"
-        OAuthToken = "${var.github_token}"
+        Owner      = var.owner
+        Repo       = var.repo_name
+        Branch     = var.branch
+        OAuthToken = var.github_token
       }
     }
   }
@@ -64,8 +65,9 @@ resource "aws_codepipeline" "codepipeline" {
       version          = "1"
 
       configuration = {
-        ProjectName = "${aws_codebuild_project.main.name}"
+        ProjectName = aws_codebuild_project.main.name
       }
     }
   }
 }
+
