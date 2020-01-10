@@ -1,15 +1,20 @@
 variable "www_domain_name" {
-  type = "string"
+  type = string
 }
+
 variable "domain_name" {
-  type = "string"
+  type = string
 }
+
 variable "secret" {
-  type = "string"
+  type = string
 }
+
 variable "main_tags" {
-  type = "map"
+  type = map(string)
 }
+
 variable "redirect_tags" {
-  type = "map"
+  type = map(string)
 }
+
