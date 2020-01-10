@@ -16,7 +16,7 @@ resource "aws_route53_record" "main" {
 
 resource "aws_route53_record" "redirect" {
   zone_id = aws_route53_zone.main.zone_id
-  name    = var.www_domain_name
+  name    = local.www_domain_name
   type    = "A"
 
   alias {

@@ -1,7 +1,3 @@
-locals {
-  s3_origin_id = "cloudfront-distribution-origin-${var.domain_name}.s3.amazonaws.com"
-}
-
 resource "aws_cloudfront_origin_access_identity" "origin_access_identity" {
   comment = "Meant to allow cloudfront to have access to s3 bucket"
 }
@@ -19,7 +15,7 @@ resource "aws_cloudfront_distribution" "cdn" {
   enabled             = true
   is_ipv6_enabled     = true
   default_root_object = "index.html"
-  aliases             = [var.domain_name, var.www_domain_name]
+  aliases             = [var.domain_name, local.www_domain_name]
   depends_on          = [aws_s3_bucket.main]
 
   default_cache_behavior {
@@ -50,6 +46,6 @@ resource "aws_cloudfront_distribution" "cdn" {
     minimum_protocol_version = "TLSv1.1_2016"
   }
 
-  tags = var.main_tags
+  tags = var.tags
 }
 

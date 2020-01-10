@@ -5,7 +5,7 @@ resource "aws_s3_bucket" "main" {
     target_bucket = aws_s3_bucket.logs.bucket
     target_prefix = "${var.domain_name}/"
   }
-  tags = var.main_tags
+  tags = var.tags
 }
 
 data "aws_iam_policy_document" "s3_policy" {
@@ -38,6 +38,6 @@ resource "aws_s3_bucket_policy" "policy" {
 resource "aws_s3_bucket" "logs" {
   bucket = "${var.domain_name}-site-logs"
   acl    = "log-delivery-write"
-  tags   = var.main_tags
+  tags   = var.tags
 }
 
