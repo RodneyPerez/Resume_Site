@@ -1,4 +1,3 @@
-codepipeline/terraform.tfvars
-codepipeline/.terraform
-infra/.terraform
-infra/terraform.tfvars
+*.tfvars
+*.terraform
+*.tfstate
