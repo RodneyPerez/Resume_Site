@@ -2,22 +2,16 @@ locals {
   s3_origin_id = "cloudfront-distribution-origin-${var.domain_name}.s3.amazonaws.com"
 }
 
+resource "aws_cloudfront_origin_access_identity" "origin_access_identity" {
+  comment = "Meant to allow cloudfront to have access to s3 bucket"
+}
+
 resource "aws_cloudfront_distribution" "cdn" {
   origin {
-    domain_name = aws_s3_bucket.main.website_endpoint
+    domain_name = aws_s3_bucket.main.bucket_domain_name
     origin_id   = local.s3_origin_id
-    origin_path = ""
-
-    custom_origin_config {
-      http_port              = 80
-      https_port             = 443
-      origin_protocol_policy = "http-only"
-      origin_ssl_protocols   = ["TLSv1.2", "TLSv1.1", "TLSv1"]
-    }
-
-    custom_header {
-      name  = "User-Agent"
-      value = var.secret
+    s3_origin_config {
+      origin_access_identity = aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path
     }
   }
 

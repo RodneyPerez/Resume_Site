@@ -5,35 +5,34 @@ resource "aws_s3_bucket" "main" {
     target_bucket = aws_s3_bucket.logs.bucket
     target_prefix = "${var.domain_name}/"
   }
-  website {
-    index_document = "index.html"
-    error_document = "404.html"
-  }
   tags = var.main_tags
 }
 
-data "aws_iam_policy_document" "read_with_secret" {
+data "aws_iam_policy_document" "s3_policy" {
   statement {
-    sid       = "1"
     actions   = ["s3:GetObject"]
     resources = ["${aws_s3_bucket.main.arn}/*"]
 
     principals {
       type        = "AWS"
-      identifiers = ["*"]
+      identifiers = ["${aws_cloudfront_origin_access_identity.origin_access_identity.iam_arn}"]
     }
+  }
 
-    condition {
-      test     = "StringEquals"
-      variable = "aws:UserAgent"
-      values   = [var.secret]
+  statement {
+    actions   = ["s3:ListBucket"]
+    resources = ["${aws_s3_bucket.main.arn}"]
+
+    principals {
+      type        = "AWS"
+      identifiers = ["${aws_cloudfront_origin_access_identity.origin_access_identity.iam_arn}"]
     }
   }
 }
 
-resource "aws_s3_bucket_policy" "read_with_secret" {
+resource "aws_s3_bucket_policy" "policy" {
   bucket = aws_s3_bucket.main.id
-  policy = data.aws_iam_policy_document.read_with_secret.json
+  policy = data.aws_iam_policy_document.s3_policy.json
 }
 
 resource "aws_s3_bucket" "logs" {
