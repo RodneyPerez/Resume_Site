@@ -32,11 +32,11 @@ resource "aws_cloudfront_distribution" "cdn" {
     }
 
     viewer_protocol_policy = "redirect-to-https"
-    # lambda_function_association {
-    #   event_type   = "origin-response"
-    #   lambda_arn   = aws_lambda_function.headers_lambda.qualified_arn
-    #   include_body = false
-    # }
+    lambda_function_association {
+      event_type   = "origin-response"
+      lambda_arn   = aws_lambda_function.headers_lambda.qualified_arn
+      include_body = false
+    }
   }
 
   restrictions {
