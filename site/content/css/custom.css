@@ -1,0 +1,30 @@
+.navigation a:hover {
+	color: #41B6E6;
+}
+
+.centered .about ul li a:hover {
+	color: #41B6E6;
+}
+.navigation a, .navigation span {
+	color: #db3eb1
+}
+
+h1, h2 {
+	color: #db3eb1
+}
+
+body.colorscheme-dark .navigation a, body.colorscheme-dark .navigation span{
+	color: #41B6E6;
+}
+
+body.colorscheme-dark h1, body.colorscheme-dark h2 {
+	color: #41B6E6;
+}
+
+body.colorscheme-dark .navigation a:hover, body.colorscheme-dark .navigation a:hover {
+	color: #db3eb1;
+}
+
+body.colorscheme-dark .content .centered .about ul li a:hover, body.colorscheme-dark .content .centered .about ul li a:hover {
+	color: #db3eb1;
+}

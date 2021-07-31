@@ -30,6 +30,8 @@ enableEmoji = true
   colorScheme = "auto"
   hidecolorschemetoggle = false
 
+  customCSS = ["css/custom.css"]
+
 [languages.en]
 languageName = ":us:"
 
@@ -48,6 +50,18 @@ name = "Github"
 icon = "fa fa-github"
 weight = 1
 url = "https://github.com/RodneyPerez/"
+
+[[params.social]]
+name = "LinkedIn"
+icon = "fa fa-linkedin"
+weight = 2
+url = "https://www.linkedin.com/in/rodney-perez/"
+
+[[params.social]]
+name = "Email"
+icon = "fa fa-reply"
+weight = 3
+url = "mailto: rodney.the.programmer@gmail.com"
 
 [params.csp]
 childsrc = ["'self'"]
