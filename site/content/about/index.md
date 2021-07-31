@@ -1,7 +1,12 @@
 # About Me
-Hello!
-Miami native, currently residing in New Mexico.
-Graduated from Wyncode Full Stack bootcamp. 
+Hello Thanks for stopping by!
+
+
+I am a Miami native, history major turned programmer currently residing in New Mexico.
+
+Graduated from Wyncode Full Stack bootcamp. Worked as a full stack developer in Health tech for a bit.
+Then moved towards Cloud Infrastructure for a bit. Now I try to do a bit of both.
+Currenly working for [Vangst](https://vangst.com/).
 
 ### Certificates
 - [CKAD: Certified Kubernetes Application Developer](https://www.credly.com/badges/a472c0bb-5869-43cb-82b2-c31be2bf2f6c)

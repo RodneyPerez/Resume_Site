@@ -20,7 +20,6 @@ enableEmoji = true
   touchIcon ="http://rodneyperez.dev/miami_panic.png"
 
 
-  footercontent = "Enter a text here."
   hideFooter = false
   hideCredits = false
   hideCopyright = false
