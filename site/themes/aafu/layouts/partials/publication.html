@@ -1,9 +1,0 @@
-{{ range.Site.Params.publication.list }}
-<p class="text-dark">
-  {{ .date }} &middot; {{ .authors }} &middot;
-  <a class="text-primary" href="{{ .link }}"
-    ><i>"{{ .title }}"</i></a
-  >
-  {{ .journal }}
-</p>
-{{ end }}
